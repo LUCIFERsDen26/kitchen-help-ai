@@ -1,29 +1,40 @@
-from flask import render_template ,url_for,flash,redirect,request
-from Foodimg2Ing import app
-from Foodimg2Ing.output import output
 import os
+from flask import Blueprint, render_template, request
+from Foodimg2Ing.predictor.output import output
 
+# Create a Blueprint
+main = Blueprint('main', __name__)
 
-@app.route('/',methods=['GET'])
+@main.route('/', methods=['GET'])
 def home():
+    """Render the home page."""
     return render_template('home.html')
 
-@app.route('/about',methods=['GET'])
+@main.route('/about', methods=['GET'])
 def about():
+    """Render the about page."""
     return render_template('about.html')
 
-@app.route('/',methods=['POST','GET'])
+@main.route('/', methods=['POST'])
 def predict():
-    imagefile=request.files['imagefile']
-    image_path=os.path.join(app.root_path,'static\\images\\demo_imgs',imagefile.filename)
+    """Handle image upload and prediction."""
+    imagefile = request.files['imagefile']
+    image_path = os.path.join(os.getcwd(), 'Foodimg2Ing/static/demo_imgs', imagefile.filename)
+    
     imagefile.save(image_path)
-    img="/images/demo_imgs/"+imagefile.filename
-    title,ingredients,recipe = output(image_path)
-    return render_template('predict.html',title=title,ingredients=ingredients,recipe=recipe,img=img)
 
-@app.route('/<samplefoodname>')
-def predictsample(samplefoodname):
-    imagefile=os.path.join(app.root_path,'static\\images',str(samplefoodname)+".jpg")
-    img="/images/"+str(samplefoodname)+".jpg"
-    title,ingredients,recipe = output(imagefile)
-    return render_template('predict.html',title=title,ingredients=ingredients,recipe=recipe,img=img)
+    img = f"/demo_imgs/{imagefile.filename}"
+    
+    title, ingredients, recipe = output(image_path)
+
+    return render_template('predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
+
+@main.route('/<samplefoodname>')
+def predict_sample(samplefoodname):
+    """Predict recipe based on a sample image filename."""
+    imagefile = os.path.join(os.getcwd(), 'Foodimg2Ing/static/images', f"{samplefoodname}.jpg")
+    img = f"/images/{samplefoodname}.jpg"
+    
+    title, ingredients, recipe = output(imagefile)
+
+    return render_template('predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
