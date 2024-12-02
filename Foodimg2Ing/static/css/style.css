@@ -31,6 +31,22 @@
   background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
 }
 
+.buttoncss{
+  
+  display: block;
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
+}
 /* Info */
 #info{
   margin-top:-1rem;
