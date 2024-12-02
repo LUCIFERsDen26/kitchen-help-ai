@@ -27,7 +27,7 @@ def predict():
     
     title, ingredients, recipe = output(image_path)
 
-    return render_template('predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
+    return render_template('search-by-image_predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
 
 @main.route('/<samplefoodname>')
 def predict_sample(samplefoodname):
@@ -37,4 +37,4 @@ def predict_sample(samplefoodname):
     
     title, ingredients, recipe = output(imagefile)
 
-    return render_template('predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
+    return render_template('search-by-image_predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
