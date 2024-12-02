@@ -1,4 +1,4 @@
-{% extends "layout.html" %} {% block home %}
+{% extends "search-by-image_layout.html" %} {% block home %}
 
 <div id="info" class="col-md-8">
   <div class="card text-center pb-2">
@@ -23,7 +23,7 @@
 
 	{% for i in range(2) %}
 	{% if title[i] != "Not a valid recipe!" %}
-	<div id="tab{{ i+1 }}" style="{% if i != 0 %}display: none;{% endif %}">
+	<div id="tab{{ i+1 }}" style="{{% if i != 0 %}}display: none;{{% endif %}}">
 	  <div class="card-body" align="left" id="result">
 		
 		<h5 class="card-title" align="center">{{ title[i] }}</h5>
