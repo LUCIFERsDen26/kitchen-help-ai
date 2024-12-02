@@ -19,11 +19,11 @@ def about():
 def predict():
     """Handle image upload and prediction."""
     imagefile = request.files['imagefile']
-    image_path = os.path.join(os.getcwd(), 'Foodimg2Ing/static/demo_imgs', imagefile.filename)
+    image_path = os.path.join(os.getcwd(), 'Foodimg2Ing\\static\\demo_imgs', imagefile.filename)
     
     imagefile.save(image_path)
 
-    img = f"/demo_imgs/{imagefile.filename}"
+    img = f"\\demo_imgs\\{imagefile.filename}"
     
     title, ingredients, recipe = output(image_path)
 
@@ -32,8 +32,8 @@ def predict():
 @main.route('/<samplefoodname>')
 def predict_sample(samplefoodname):
     """Predict recipe based on a sample image filename."""
-    imagefile = os.path.join(os.getcwd(), 'Foodimg2Ing/static/images', f"{samplefoodname}.jpg")
-    img = f"/images/{samplefoodname}.jpg"
+    imagefile = os.path.join(os.getcwd(), 'Foodimg2Ing\\static\\images', f"{samplefoodname}.jpg")
+    img = f"\\images\\{samplefoodname}.jpg"
     
     title, ingredients, recipe = output(imagefile)
 
