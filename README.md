@@ -1,36 +1,38 @@
-![ViewCount](https://views.whatilearened.today/views/github/navassherif98/Recipe-Generation-from-Food-Image.svg?cache=remove)
-
-# Recipe-Generation-from-Food-Image
+# Meal Mind
 
 ### Demo:
 ![Recipe_Generation gif](https://user-images.githubusercontent.com/55757415/124395585-8d0d0780-dd22-11eb-86fe-3a23d921b608.gif)
 
-Are you ever in the situation where you have a mouthwatering picture of a delicious dish but no idea how to recreate it? Look no further! Our "Recipe Generation from Food Images" project harnesses the power of deep learning to provide you with a solution.
+
+#### Ever found yourself staring at a delicious dish and wondering how to recreate it? With the Recipe Generation from Food Images application, simply snap a photo and let the system provide you with a detailed recipe.
 
 ### Overview:
 
-This innovative application uses state-of-the-art deep learning techniques to analyze food images and generate comprehensive cooking recipes. From a simple snapshot of your favorite dish, our system can extract essential information including:
+This application utilizes deep learning to analyze food images and generate detailed cooking recipes. The system extracts key information from the image, such as:
 
-**Recipe Title**: A catchy and descriptive title for the dish.
-
-**Ingredients**: A detailed list of all the ingredients needed.
-
-**Instructions**: Step-by-step cooking instructions to help you recreate the dish flawlessly.
+    Recipe Title: A catchy name for the dish.
+    Ingredients: A list of all the necessary ingredients.
+    Instructions: Step-by-step cooking instructions for preparing the dish.
 
 ### Key Features:
 
-**Deep Learning Magic**: Our model employs cutting-edge computer vision algorithms to identify ingredients and cooking processes within food images.
+- Advanced Deep Learning: State-of-the-art computer vision algorithms identify ingredients and cooking processes from food images.
 
-**Natural Language Generation**: It utilizes advanced natural language processing to create coherent and easy-to-follow cooking instructions.
+- Natural Language Generation: Uses natural language processing to generate easy-to-follow cooking instructions from the analyzed data.
 
-**User-Friendly Interface**: A user-friendly web or mobile interface for hassle-free recipe generation.
+- Search by Image: Simply upload a photo of a dish, and the system will generate the recipe, identifying key ingredients and instructions.
 
-**Endless Culinary Exploration**: Discover new recipes and cuisines by simply snapping a picture of any dish.
+- Search by Ingredients: Enter the ingredients you have, and the system will suggest recipes based on those items.
 
+- Search by Recipe Name: Find recipes by entering the name of the dish and get detailed information, including ingredients and instructions.
+
+- User-Friendly Interface: An intuitive web or mobile interface designed for a seamless user experience.
+
+- Discover New Recipes: Explore a wide range of cuisines and dishes by simply taking pictures or entering ingredients.
 ---
 
 ### Prerequisite :
-Download these files and replace it with the files in this folder "Foodimg2Ing/data/"
+Download these files and replace it with the files in this folder "Foodimg2Ing/predictor/models"
 
 1. Model (Modelbest.ckpt) : [Download Modelbest.ckpt](https://dl.fbaipublicfiles.com/inversecooking/modelbest.ckpt)
 
@@ -41,8 +43,19 @@ Download these files and replace it with the files in this folder "Foodimg2Ing/d
 ### To run the Code :
 
 1. Open Terminal (cmd)
-2. Install all the required libraries using "pip install -r requirements.txt"
-3. run "python run.py"
+
+2. Create Virtule Enviroment by 
+    ```bash 
+    pytohn3 -m venv venv
+    ```
+3. Install all the required libraries using 
+    ```bash 
+    pip install -r requirements.txt
+    ```
+4. run 
+    ```bash 
+    python run.py
+    ```
 
 You will be getting a localhost link and open that link in your browser 
 
