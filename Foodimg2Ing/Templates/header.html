@@ -38,8 +38,8 @@
 		<a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.home') }}">
 		  <img
 			src="{{ url_for('static', filename='images/healthy-food.png') }}"
-			width="45"
-			height="45"
+			width="50"
+			height="50"
 			class="d-inline-block align-top"
 			alt="Meal Mind Logo"
 			style="margin-right: 10px"
@@ -58,14 +58,14 @@
 		  <span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-		  <ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-			  <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
-			</li>
-		  </ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item {% if request.endpoint == 'main.home' %}active{% endif %}">
+				  <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
+				</li>
+				<li class="nav-item {% if request.endpoint == 'main.about' %}active{% endif %}">
+				  <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
+				</li>
+			  </ul>
 		</div>
 	  </div>
 	</nav>
@@ -73,7 +73,7 @@
 	<!-- Hero Section -->
 	<section class="bg-light py-5">
 		<div class="container text-center">
-		  <h1 class="display-4 text-dark">Find Your Favorite Recipes Here!</h1>
+		  <h1 class="display-6 text-dark">Find Your Favorite Recipes Here!</h1>
 		  <p class="lead text-secondary">
 			Discover, explore, and cook delicious recipes tailored to your taste.
 		  </p>
@@ -100,28 +100,43 @@
 				</li>
 			</ul>
 			</div>
-		</div>
-		
-		<!-- Custom Script to Add/Remove .buttoncss -->
-		
-  
+		</div> 
 	</section>
-	  
 
-	{% block content %}{% endblock %}
+	<section>
+		<div class="tab-content" id="pills-tabContent">
+			<div class="tab-pane fade show active" id="one" role="tabpanel" aria-labelledby="tab-one">
+				{% block searchByImage %}
+				
+				{% endblock %}
+			</div>
 
-	<!-- Footer -->
+			<div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="tab-two">
+				{% block searchByName %}
+				
+				{% endblock %}
+			</div>
+
+			<div class="tab-pane fade" id="three" role="tabpanel" aria-labelledby="tab-three">
+				{% block searchByIngredients %}
+				
+				{% endblock %}
+			</div>
+		</div>
+	</section>
+
+	
 	<footer class="bg-dark text-white py-4">
-	  <div class="container text-center">
-		<p class="mb-0">
-		  &copy; 2024 Meal Mind. All rights reserved.
-		</p>
-		<p class="mb-0">
-			The site is been developed and Handeled by the students of Sanjivani College of Engineering, Kopargaon.
-		</p>
-	  </div>
+		<div class="container text-center">
+			<p class="mb-0">
+				&copy; 2024 Meal Mind. All rights reserved.
+			</p>
+			<p class="mb-0">
+			  The site is been developed and Handeled by the students of Sanjivani College of Engineering, Kopargaon.
+			</p>
+		</div>
 	</footer>
-
+	
 	<!-- jQuery and Bootstrap JS -->
 	<script
 	  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
