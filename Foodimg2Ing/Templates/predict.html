@@ -5,6 +5,7 @@
 	<div class="card-header">
 	  <ul class="nav nav-tabs card-header-tabs">
 		{% for i in range(2) %}
+		{% if title[i] != "Not a valid recipe!" %}
 		<li class="nav-item">
 		  <a
 			class="nav-link {% if i == 0 %}active{% endif %}"
@@ -15,14 +16,16 @@
 			Recipe {{ i+1 }}
 		  </a>
 		</li>
+		{% endif %}
 		{% endfor %}
 	  </ul>
 	</div>
 
 	{% for i in range(2) %}
+	{% if title[i] != "Not a valid recipe!" %}
 	<div id="tab{{ i+1 }}" style="{% if i != 0 %}display: none;{% endif %}">
 	  <div class="card-body" align="left" id="result">
-		{% if title[i] != "Not a valid recipe!" %}
+		
 		<h5 class="card-title" align="center">{{ title[i] }}</h5>
 		<br />
 		<h6>Ingredients :</h6>
@@ -34,15 +37,15 @@
 		  <li class="card-text">{{ step }}</li>
 		  {% endfor %}
 		</ol>
-		{% else %}
-		<h5 class="card-title" align="center">{{ title[i] }}</h5>
 		<br />
-		<h6 class="card-text">{{ recipe[i] }}</h6>
+		{% if i == 0 %}
+			<p class="card-text">
+			<small class="text-muted">Check both the Recipes</small>
+			</p>
 		{% endif %}
-		<br />
-		<p class="card-text">
-		  <small class="text-muted">Check both the Recipes</small>
-		</p>
+		{% else %}
+			{{continue}}
+		{% endif %}
 	  </div>
 	</div>
 	{% endfor %}
