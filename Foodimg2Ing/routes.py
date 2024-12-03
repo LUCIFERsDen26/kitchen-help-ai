@@ -1,6 +1,10 @@
 import os
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, jsonify
 from Foodimg2Ing.predictor.output import output
+
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 # Create a Blueprint
 main = Blueprint('main', __name__)
@@ -24,17 +28,16 @@ def predict():
     imagefile.save(image_path)
 
     img = f"\\demo_imgs\\{imagefile.filename}"
-    
+    img2 = f"\\static\\demo_imgs\\{imagefile.filename}"
     title, ingredients, recipe = output(image_path)
+    return render_template('search-by-image_predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img2)
 
-    return render_template('search-by-image_predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
 
 @main.route('/<samplefoodname>')
 def predict_sample(samplefoodname):
     """Predict recipe based on a sample image filename."""
     imagefile = os.path.join(os.getcwd(), 'Foodimg2Ing\\static\\images', f"{samplefoodname}.jpg")
     img = f"\\images\\{samplefoodname}.jpg"
-    
-    title, ingredients, recipe = output(imagefile)
 
+    title, ingredients, recipe = output(imagefile)
     return render_template('search-by-image_predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
