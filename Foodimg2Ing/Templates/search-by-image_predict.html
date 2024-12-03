@@ -1,5 +1,6 @@
-{% extends "search-by-image_layout.html" %} {% block home %}
-
+{% extends "home.html" %} {% block home %}
+<section class="main-section cards-section text-center snipcss-vjEvd">
+	<img src="{{ img }}" alt="Uploaded Food Image" class="img-fluid" style="max-height: 300px; margin-bottom: 20px;">
 <div id="info" class="col-md-8">
 	<div class="card text-center pb-2">
 		<div class="card-header">
@@ -53,7 +54,8 @@
 		</div>
 	</div>
 </div>
-
+</div>
+</section>
 
 
 {% endblock home %}
