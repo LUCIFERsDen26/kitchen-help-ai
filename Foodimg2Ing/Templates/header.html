@@ -1,172 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta
-	  name="viewport"
-	  content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-	/>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link
-	  rel="stylesheet"
-	  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	  crossorigin="anonymous"
-	/>
-	<link
-	  rel="stylesheet"
-	  href="{{ url_for('static', filename='css/style.css') }}"
-	/>
-	<link
-	  rel="stylesheet"
-	  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-	/>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
-	<title>Meal Mind</title>
-	<link
-	  rel="shortcut icon"
-	  href="{{ url_for('static', filename='images/healthy-food.png') }}"
-	/>
-  </head>
+    
+    
 
-  <body>
-	<!-- Navigation Bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-sm">
-	  <div class="container">
-		<a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.home') }}">
-		  <img
-			src="{{ url_for('static', filename='images/healthy-food.png') }}"
-			width="50"
-			height="50"
-			class="d-inline-block align-top"
-			alt="Meal Mind Logo"
-			style="margin-right: 10px"
-		  />
-		  <span class="font-weight-bold text-success">Meal Mind</span>
-		</a>
-		<button
-		  class="navbar-toggler"
-		  type="button"
-		  data-toggle="collapse"
-		  data-target="#navbarNavDropdown"
-		  aria-controls="navbarNavDropdown"
-		  aria-expanded="false"
-		  aria-label="Toggle navigation"
-		>
-		  <span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item {% if request.endpoint == 'main.home' %}active{% endif %}">
-				  <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
-				</li>
-				<li class="nav-item {% if request.endpoint == 'main.about' %}active{% endif %}">
-				  <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
-				</li>
-			  </ul>
-		</div>
-	  </div>
-	</nav>
+    <title>BiteBlueprint</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/healthy-food.png') }}">
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <div id="Section-1">
+        <nav class="navbar navbar-expand-lg navbar-light bg-grey">
+            <a class="navbar-brand mr-auto" href="{{url_for('main.home')}}" style="font-family: 'Times New Roman', Times, serif;">
+                <img src="{{ url_for('static',filename='images/healthy-food.png') }}" width="30" height="30" class="d-inline-block align-top" alt="" style="margin-top: -5.5px;">
+                BiteBlueprint</a>
+            <a href="{{url_for('main.home')}}" class="w-100 text-center text-dark">Your Gateway to Tasty Creations!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('main.home')}}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('main.about')}}">About</a>
+                </li>
+            </ul>
+            </div>
+        </nav>
+    </div>
+    
+  
 
-	<!-- Hero Section -->
-	<section class="bg-light py-5">
-		<div class="container text-center">
-		  <h1 class="display-6 text-dark">Find Your Favorite Recipes Here!</h1>
-		  <p class="lead text-secondary">
-			Discover, explore, and cook delicious recipes tailored to your taste.
-		  </p>
-		</div>
-	  
-		<!-- Centered Nav Pills -->
-		<div class="container">
-			<div class="d-flex justify-content-center pt-4">
-			<ul class="nav nav-pills" id="pills-tab" role="tablist">
-				<li class="nav-item">
-				<a class="nav-link main-nav active buttoncss" id="tab-one" data-toggle="pill" href="#one" role="tab" aria-selected="true">
-					Search by Image
-				</a>
-				</li>
-				<li class="nav-item">
-				<a class="nav-link main-nav" id="tab-two" data-toggle="pill" href="#two" role="tab" aria-selected="false">
-					Search by Recipe
-				</a>
-				</li>
-				<li class="nav-item">
-				<a class="nav-link main-nav" id="tab-three" data-toggle="pill" href="#three" role="tab" aria-selected="false">
-					Search by Ingredients
-				</a>
-				</li>
-			</ul>
-			</div>
-		</div> 
-	</section>
 
-	<section>
-		<div class="tab-content" id="pills-tabContent">
-			<div class="tab-pane fade show active" id="one" role="tabpanel" aria-labelledby="tab-one">
-				{% block searchByImage %}
-				
-				{% endblock %}
-			</div>
 
-			<div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="tab-two">
-				{% block searchByName %}
-				
-				{% endblock %}
-			</div>
+    {% block content %}{% endblock %}
 
-			<div class="tab-pane fade" id="three" role="tabpanel" aria-labelledby="tab-three">
-				{% block searchByIngredients %}
-				
-				{% endblock %}
-			</div>
-		</div>
-	</section>
 
-	
-	<footer class="bg-dark text-white py-4">
-		<div class="container text-center">
-			<p class="mb-0">
-				&copy; 2024 Meal Mind. All rights reserved.
-			</p>
-			<p class="mb-0">
-			  The site is been developed and Handeled by the students of Sanjivani College of Engineering, Kopargaon.
-			</p>
-		</div>
-	</footer>
-	
-	<!-- jQuery and Bootstrap JS -->
-	<script
-	  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	  crossorigin="anonymous"
-	></script>
-	<script
-	  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	  crossorigin="anonymous"
-	></script>
-	<script
-	  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	  crossorigin="anonymous"
-	></script>
-	<script
-	  src="{{ url_for('static', filename='main.js') }}"
-	  type="text/javascript"
-	></script>
-	<script>
-		$(document).ready(function() {
-		$('#pills-tab a').on('shown.bs.tab', function(e) {
-			// Remove .buttoncss from all tabs
-			$('#pills-tab a').removeClass('buttoncss');
-			
-			// Add .buttoncss to the active tab
-			$(e.target).addClass('buttoncss');
-		});
-		});
-	</script>
-  </body>
+    
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+<section class="footer">
+    <h4>About us</h4>
+    <p>The site is been developed and Handeled by the students of Sanjivani College of Engineering, Kopargaon.
+</section>
 </html>
