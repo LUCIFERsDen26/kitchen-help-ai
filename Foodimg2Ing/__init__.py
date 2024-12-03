@@ -17,9 +17,12 @@ def create_app():
     # Import and register Blueprints
     #from Foodimg2Ing.routes.routesMain import main as main_blueprint
     from Foodimg2Ing.routes.routesApiNinija import recipeApi as recipeApi_blueprint
-    from Foodimg2Ing.routes.nutrientsRoutes import nutrients_api 
+    from Foodimg2Ing.routes.routesNutrients import nutrients_api 
+    from Foodimg2Ing.routes.routesIngd2Recipe import ingd2Recipes as ingd2Recipe_blueprint
+
     #app.register_blueprint(main_blueprint)
     app.register_blueprint(recipeApi_blueprint)
     app.register_blueprint(nutrients_api)
+    app.register_blueprint(ingd2Recipe_blueprint)
     return app
 
