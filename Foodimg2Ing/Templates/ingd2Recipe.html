@@ -1,0 +1,113 @@
+{% extends "header.html" %} {% block indtorecipe %}
+<div class="full-screen-section-2" id="first-section">
+  <div class="container mt-3" id="output-container">
+    {% if recipes %}
+    <div class="container text-center mb-3">
+      {% for ingredient in ingredients %} {{ ingredient }}, {% endfor %}
+    </div>
+    <div class="card text-center pb-2">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          {% for recipe in recipes %}
+          <li class="nav-item">
+            <a
+              class="nav-link {% if loop.index == 1 %}active{% endif %}"
+              id="tabbtn_{{ loop.index }}"
+              href="#"
+              onclick="showTab({{ loop.index }});"
+            >
+              Recipe {{ loop.index }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% for recipe in recipes %}
+      <div
+        id="tab{{ loop.index }}"
+        style="{% if loop.index != 1 %}display: none;{% endif %}"
+      >
+        <div class="card-body" align="left">
+          <h5 class="card-title" align="center">{{ recipe.recipe_title }}</h5>
+          <h6>Ingredients:</h6>
+          <p class="card-text">{{ recipe.recipe_indgredents }}</p>
+          <h6>Recipe:</h6>
+          <p>{{ recipe.recipe_steps }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("add-ingredient-btn")
+    .addEventListener("click", function () {
+      const container = document.getElementById("ingredients-container");
+
+      const textInputs = document.getElementsByName("ingredients[]");
+      let hasEmptyField = false;
+
+      textInputs.forEach((input) => {
+        if (input.value.trim() === "") {
+          input.style.border = "1px solid red";
+          hasEmptyField = true;
+        } else {
+          input.style.border = "";
+        }
+      });
+
+      if (hasEmptyField) {
+        alert("Please fill in all ingredient fields before adding a new one.");
+        return;
+      }
+
+      const newIngredientGroup = document.createElement("div");
+      newIngredientGroup.className = "input-group mb-2";
+
+      newIngredientGroup.innerHTML = `
+			<input type="text" name="ingredients[]" class="form-control" placeholder="Enter ingredient" required>
+			${
+        textInputs.length > 0
+          ? '<button type="button" class="btn btn-danger remove-btn">Remove</button>'
+          : ""
+      }
+		`;
+
+      container.appendChild(newIngredientGroup);
+
+      const removeBtn = newIngredientGroup.querySelector(".remove-btn");
+      if (removeBtn) {
+        removeBtn.addEventListener("click", function () {
+          newIngredientGroup.remove();
+        });
+      }
+    });
+
+  document
+    .getElementById("ingredients-container")
+    .addEventListener("click", function (e) {
+      if (e.target.classList.contains("remove-btn")) {
+        e.target.parentElement.remove();
+      }
+    });
+</script>
+<script>
+  function showTab(tabIndex) {
+    const currentLink = document.querySelector(".nav-link.active");
+    currentLinkId = currentLink.id.split("_")[1];
+    if (currentLink) currentLink.classList.remove("active");
+    const newLink = document.getElementById("tabbtn_" + tabIndex);
+    newLink.classList.add("active");
+
+    const currentTab = document.getElementById("tab" + currentLinkId);
+    currentTab.style.display = "none";
+    const newTab = document.getElementById("tab" + tabIndex);
+    newTab.style.display = "block";
+    createRadarChart(tabIndex);
+  }
+</script>
+{% endblock %}
