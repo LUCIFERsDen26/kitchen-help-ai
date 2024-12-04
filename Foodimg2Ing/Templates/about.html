@@ -1,29 +1,62 @@
 {% extends "layout.html" %} {% block content %}
-<div id="section-about" onload="sampleFunction()">
-  <div
-    style="background-image: url('Bk.png')"
-    id="aboutcard"
-    class="card col-md-8"
-  >
-    <div class="card-header">
-      <b>ABOUT</b>
-    </div>
-    <div class="card-body">
-      <p class="title">TITLE : Recipe Generation</p>
-      <p class="title">ABSTRACT :</p>
-      <p class="aboutcontent">
-        People enjoy food photography because they appreciate food. Behind each
-        meal there is a story described in a complex recipe and, unfortunately,
-        by simply looking at a food image we do not have access to its
-        preparation process. Therefore, in this paper we introduce an inverse
-        cooking system that recreates cooking recipes given food images. Our
-        system predicts ingredients as sets by means of a novel architecture,
-        modeling their dependencies without imposing any order, and then
-        generates cooking instructions by attending to both image and its
-        inferred ingredients simultaneously.
+
+<section class="about-us">
+  <div class="row">
+    <div class="about-col">
+      <h1>About Us</h1>
+      <p>
+        Welcome to our platform, where technology meets culinary creativity! Our
+        project is designed to make cooking easier and more enjoyable by
+        generating personalized recipes using advanced image recognition and
+        ingredient-based inputs. Simply upload a picture of a dish or provide a
+        list of ingredients, and our platform will create innovative,
+        easy-to-follow recipes tailored to your preferences. Whether you're
+        exploring new cuisines, experimenting with available ingredients, or
+        looking for fresh inspiration, our website ensures a seamless and
+        exciting culinary journey. Cooking has never been this intuitive and
+        rewarding!
       </p>
+      <a href="/" class="hero-btn red-btn">Home</a>
+    </div>
+    <div class="about-col">
+      <img src="{{ url_for('static',filename='images/ABPawarSir.png')}}" />
+      <h5>Guided by</h5>
+      <h6>Dr.A.B.Pawar</h6>
     </div>
   </div>
-</div>
+</section>
+<section class="team">
+  <h2>Meet Our Team</h2>
+  <div class="team-row">
+    <div class="team-member">
+      <img
+        src="{{ url_for('static', filename='images/Member1.jpg')}}"
+        alt="Member 1"
+      />
+      <h3>Miss.Saisha Shinde</h3>
+    </div>
+    <div class="team-member">
+      <img
+        src="{{ url_for('static', filename='images/Member2.jpg')}}"
+        alt="Member 2"
+      />
+      <h3>Miss.Kiran Nikam</h3>
+    </div>
+    <div class="team-member">
+      <img
+        src="{{ url_for('static', filename='images/Member3.jpg')}}"
+        alt="Member 3"
+      />
+      <h3>Miss.Shravani Shinde</h3>
+    </div>
+    <div class="team-member">
+      <img
+        src="{{ url_for('static', filename='images/Member4.jpg')}}"
+        alt="Member 4"
+      />
+      <h3>Miss.Swarangi Raut</h3>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}
