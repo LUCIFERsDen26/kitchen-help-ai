@@ -1017,7 +1017,14 @@ img {
     align-items: center;   /* Centers vertically */
     height: 100vh;         /* Full viewport height */
 }
-
+.full-screen-section-2 {
+    height: 100vh; /* Make the first section full-screen */
+    background-color: #ffffff; /* Light background color */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;   /* Centers vertically */
+    height: 100vh;         /* Full viewport height */
+}
 /* Optional: add smooth scroll transition for the whole page */
 /* html {
     scroll-behavior: smooth;
@@ -1043,3 +1050,14 @@ img {
     line-height: 1.5; /* Improves readability with proper line spacing */
 }
 
+#output-container {
+    min-height: 700px; /* Set the minimum height */
+    max-height: 800px; /* Optional: To prevent it from growing too large */
+    width: 100%; /* Adjust to fit the parent container */
+    overflow-y: auto; /* Add scroll if content overflows */
+}
+
+/* Optional: Style the card to match the container */
+.card {
+    height: 100%;
+}
