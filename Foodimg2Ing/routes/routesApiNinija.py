@@ -5,10 +5,8 @@ from Foodimg2Ing.utils.nutrientsUtils import fetch_nutrients
 # Create a Blueprint
 recipeApi = Blueprint('recipeApi', __name__)
 
-
 @recipeApi.route('/get_recipes', methods=['GET', 'POST'])
 def get_recipes():
-    
     recipes = []
     nutrients_data = []
 
@@ -32,5 +30,10 @@ def get_recipes():
                 
             else:
                 recipes = [{"Error":"no recipes found","title": "Error", "ingredients": "N/A", "instructions": "N/A"}]
+    # print('\n\n-------------------------------')
+    # print(recipes)
+    # print('\n\n')
+    # print(nutrients_data)
+    # print('------------------------------------\n\n')
             
     return render_template('apirecipesPages/getrecipes.html', recipes=recipes, nutrients_data=nutrients_data)
