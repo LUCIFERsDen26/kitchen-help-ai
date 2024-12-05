@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block hero %}
+<div class="container text-center">
+    <h1 class="display-6 text-dark">Find Your Favorite Recipes Here!</h1>
+    <p class="lead text-secondary">
+        Discover, explore, and cook delicious recipes tailored to your taste.
+    </p>
+    <p class="mt-5">
+        How would you like to search?
+    </p>
+</div>
+
+<!-- Centered Nav Pills -->
+<div class="container">
+    <div class="d-flex justify-content-center pt-2">
+        <ul class="nav gap-2">
+            <li class="nav-item">
+                <a class="nav-link main-nav {% if request.endpoint == 'main.home' or request.endpoint == 'main.predict_sample' %}active{% endif %} buttoncss" id="searchByImage" href="/">
+                    Image
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link main-nav {% if request.endpoint == 'recipeApi.get_recipes' %}active{% endif %} buttoncss" id="searchByRecipeName" href="/searchByRecipeName">
+                    Recipe Name
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link main-nav {% if request.endpoint == 'ingd2Recipe.ingd2Recipe' %}active{% endif %} buttoncss" id="searchByIngredients" href="/searchByIngredients">
+                    Ingredients
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container  mt-4">
+    {% block content %}
+
+    {% endblock %}
+</div>
+{% endblock hero %}
+
+

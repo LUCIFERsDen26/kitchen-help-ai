@@ -1,0 +1,94 @@
+{% extends "hero.html" %}
+
+{% block content %}
+<div class="container pt-2 ">
+	<div class="row">
+		<div class="col-md-4  mt-3">
+			<h3 class="text-center mb-4">Searh by Ingredients</h3>
+
+			<!-- Form to collect ingredients -->
+			<form id="ingredients-form" method="POST">
+				<div id="ingredients-container" class="mb-4">
+					<!-- Ingredient Input Group Template -->
+					<div class="input-group mb-2">
+						<input type="text" name="ingredients[]" class="form-control" placeholder="Enter ingredient"
+							required>
+						<!-- <button type="button" class="btn btn-danger remove-btn">Remove</button> -->
+					</div>
+				</div>
+
+				<div class="container d-flex justify-content-center gap-4">
+					<!-- Button to add more ingredients -->
+					<button type="button" id="add-ingredient-btn" class="btn btn-secondary ">Add Another
+						Ingredient</button>
+
+					<!-- Submit button -->
+					<button type="submit" class="btn btn-primary" onclick="showloader()">find my recipe!</button>
+				</div>
+			</form>
+
+		</div>
+
+		{% block searchByIndgredentsDisplay %}
+		{% endblock %}
+	</div>
+</div>
+<script>
+	document.getElementById('add-ingredient-btn').addEventListener('click', function () {
+		const container = document.getElementById('ingredients-container');
+
+		// Get all current input fields
+		const textInputs = document.getElementsByName("ingredients[]");
+		let hasEmptyField = false;
+
+		// Check if the limit of 5 inputs is reached
+		if (textInputs.length >= 5) {
+			alert("You can only add up to 5 ingredients.");
+			return;
+		}
+
+		// Validate all existing input fields
+		textInputs.forEach(input => {
+			if (input.value.trim() === "") {
+				input.style.border = "1px solid red";
+				hasEmptyField = true;
+			} else {
+				input.style.border = "";
+			}
+		});
+
+		if (hasEmptyField) {
+			alert("Please fill in all ingredient fields before adding a new one.");
+			return;
+		}
+
+		// Create a new input group if validation passes
+		const newIngredientGroup = document.createElement('div');
+		newIngredientGroup.className = 'input-group mb-2';
+
+		// Add a remove button only if it's not the first input
+		newIngredientGroup.innerHTML = `
+        <input type="text" name="ingredients[]" class="form-control" placeholder="Enter ingredient" required>
+        <button type="button" class="btn btn-danger remove-btn">Remove</button>
+    `;
+
+		container.appendChild(newIngredientGroup);
+
+		// Attach event listener to the new remove button
+		const removeBtn = newIngredientGroup.querySelector('.remove-btn');
+		if (removeBtn) {
+			removeBtn.addEventListener('click', function () {
+				newIngredientGroup.remove();
+			});
+		}
+	});
+
+	// Event delegation for dynamically added remove buttons
+	document.getElementById('ingredients-container').addEventListener('click', function (e) {
+		if (e.target.classList.contains('remove-btn')) {
+			e.target.parentElement.remove();
+		}
+	});
+
+</script>
+{% endblock %}

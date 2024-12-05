@@ -49,12 +49,12 @@ def output(uploadedfile):
     image_transf = transform(img)
     image_tensor = to_input_transf(image_transf).unsqueeze(0).to(device)
 
-    greedy = [True, False]
-    beam = [-1, -1]
+    greedy = [True, True, False]
+    beam = [-1, -1, -1]
     temperature = 1.0
     numgens = len(greedy)
 
-    title, ingredients, recipe = [], [], []
+    recipes = []
 
     for i in range(numgens):
         with torch.no_grad():
@@ -72,11 +72,15 @@ def output(uploadedfile):
         outs, valid = prepare_output(recipe_ids[0], ingr_ids[0], ingrs_vocab, vocab)
 
         if valid['is_valid']:
-            title.append(outs['title'])
-            ingredients.append(outs['ingrs'])
-            recipe.append(outs['recipe'])
+            recipes.append({
+            'title' : outs['title'],
+            'ingredients' : outs['ingrs'],
+            'instructions': outs['recipe']
+            })
         else:
-            title.append("Not a valid recipe!")
-            recipe.append("Reason: " + valid['reason'])
+            recipes.append({
+            'title' : "Not a valid recipe!",
+            'Error' : "Reason: " + valid['reason']
+            })
 
-    return title, ingredients, recipe
+    return recipes

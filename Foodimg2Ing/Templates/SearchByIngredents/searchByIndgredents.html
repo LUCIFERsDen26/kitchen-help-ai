@@ -1,0 +1,31 @@
+{% extends "SearchByIngredents/input_SearchByIndgredents.html" %}
+
+{% block searchByIndgredentsDisplay %}
+<div id="info" class="col-md-8 mt-3" style="display:block;">
+    <div class="card m-3">
+        <img src="{{ url_for('static',filename='cardImage/searchByIndgredents.jpg')}}" class="card-img-top"  style="width: 100%;" alt="...">
+        <div class="card-body">
+            <h5 class="card-title text-center" id=infotitle>Recipe Generation from ingredients</h5>
+            <br>
+            <p class="card-text" id="infobody">list the ingredients!<br>Our Model will predict its
+                Recipe.</p>
+            <p class="card-text"><small class="text-muted">Processing time : Approx 10s</small></p>
+        </div>
+    </div>
+</div>
+
+
+<div id="loading" class="col-md-8 mt-4" style="display:none;width: 50%; margin: 0 auto;" >
+    <div>
+        <div class="loader" style="margin: 0 auto;">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+        </div>
+        <div class="ms-3 text-center">
+            <h5>Loading</h5>
+            <p>Kindly wait for few seconds</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
