@@ -1,61 +1,62 @@
 
 const wrapper = document.querySelector(".wrapper");
 const fileName = document.querySelector(".file-name");
-const defaultBtn = document.querySelector("#default-btn");
 const customBtn = document.querySelector("#custom-btn");
 const cancelBtn = document.querySelector("#cancel-btn i");
 const img = document.querySelector("#foodimage");
 const imgform=document.querySelector("#foodimgform");
 let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
 
-function defaultBtnActive(){
-    defaultBtn.click();    
-}
-defaultBtn.addEventListener("change", function(){
-    const file = this.files[0];
-    if(file){
-    const reader = new FileReader();
-    reader.onload = function(){
-        const result = reader.result;
-        img.src = result;
-        console.log(result)
-        wrapper.classList.add("active");
-        document.getElementById("info").style.display = "none";
-        document.getElementById("loading").style.display = "block";
-        imgform.submit();
-        
-    }
-    cancelBtn.addEventListener("click", function(){
-        img.src = "";
-        wrapper.classList.remove("active");
-        window.location.href = "";
-        
-    })
-    
-    reader.readAsDataURL(file);
-    }
-    if(this.value){
-    let valueStore = this.value.match(regExp);
-    fileName.textContent = valueStore;
-    
-    }
-});
 
-function myFunctab1() {
-    document.getElementById("tab2").style.display = "none";
-    document.getElementById("tab1").style.display = "block";
-    document.getElementById("tabbtn2").className="nav-link"
-    document.getElementById("tabbtn1").className="nav-link active"
-    
-    
+function showloader(){
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("info").style.display = "none";
+}
+function hideloader(){
+    document.getElementById("loading").style.display = "none !important";
+    document.getElementById("info").style.display = "block";
 }
 
-function myFunctab2() {
-    document.getElementById("tab1").style.display = "none";
-    document.getElementById("tab2").style.display = "block";
-    document.getElementById("tabbtn1").className="nav-link"
-    document.getElementById("tabbtn2").className="nav-link active"
+
+window.onload = function() {
+    console.log("loaded");
+    document.getElementById("custom-btn").addEventListener("click", function() {
+        // Trigger file input click        
+        document.getElementById("default-btn").click();
+        console.log("clicked");
+        
+    });
 }
+
+function defaultBtnActive(input) {
+    var file = input.files[0];
+    if (file) {
+        showloader();
+        var reader = new FileReader();
+        reader.onload = function() {
+            var result = reader.result;
+            var img = document.getElementById("foodimage");
+            img.src = result;
+            console.log(result);
+
+            // Show loading and submit form
+            document.querySelector(".content .text").textContent = "File loaded!";
+            
+            // document.getElementById("loading").style.display = "block";
+            document.getElementById("foodimgform").submit();
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    if (input.value) {
+        var fileName = document.querySelector(".file-name");
+        fileName.textContent = input.value.split("\\").pop();  // Show file name
+    }
+}
+
+
+
 
 function select(filename){
     img.src = "/static/images/"+filename
@@ -64,7 +65,4 @@ function select(filename){
     document.getElementById("loading").style.display = "block";
     document.getElementById("close").click()
 }
-
-
     
-
