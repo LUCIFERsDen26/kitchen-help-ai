@@ -1,9 +1,9 @@
 
-const wrapper = document.querySelector(".wrapper");
+
 const fileName = document.querySelector(".file-name");
 const customBtn = document.querySelector("#custom-btn");
 const cancelBtn = document.querySelector("#cancel-btn i");
-const img = document.querySelector("#foodimage");
+
 const imgform=document.querySelector("#foodimgform");
 let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
 
@@ -59,10 +59,14 @@ function defaultBtnActive(input) {
 
 
 function select(filename){
+    const img = document.querySelector("#foodimage");
+    const wrapper = document.querySelector(".wrapper");
+
     img.src = "/static/images/"+filename
+
     wrapper.classList.add("active");
-    document.getElementById("info").style.display = "none";
-    document.getElementById("loading").style.display = "block";
-    document.getElementById("close").click()
+    showloader();
+    ctx = document.getElementById("close").click()
+  
 }
     
