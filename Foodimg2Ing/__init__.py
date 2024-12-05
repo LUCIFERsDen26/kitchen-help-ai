@@ -15,12 +15,12 @@ def create_app():
     app.config['NutritionixAPI_applicationKEY'] = os.getenv('NutritionixAPI_applicationKEY')
 
     # Import and register Blueprints
-    #from Foodimg2Ing.routes.routesMain import main as main_blueprint
-    from Foodimg2Ing.routes.routesApiNinija import recipeApi as recipeApi_blueprint
-    from Foodimg2Ing.routes.routesNutrients import nutrients_api 
-    from Foodimg2Ing.routes.routesIngd2Recipe import ingd2Recipes as ingd2Recipe_blueprint
+    from Foodimg2Ing.routes.routesByImage import main as main_blueprint
+    from Foodimg2Ing.routes.routesByRecipeName import recipeApi as recipeApi_blueprint
+    from Foodimg2Ing.routes.routesGetNutrients import nutrients_api 
+    from Foodimg2Ing.routes.routesByIngredients import ingd2Recipes as ingd2Recipe_blueprint
 
-    #app.register_blueprint(main_blueprint)
+    app.register_blueprint(main_blueprint)
     app.register_blueprint(recipeApi_blueprint)
     app.register_blueprint(nutrients_api)
     app.register_blueprint(ingd2Recipe_blueprint)
