@@ -67,4 +67,4 @@ def predict_sample(samplefoodname):
     # print(nutrients_data, end='\n\n')
     # print(recipes)
     # print('-------------------------------')
-    return render_template('SearchByImage/output_SearchByImage.html',recipes=recipes, imgName=img, nutrients_data=nutrients_data)
+    return render_template('SearchByImage/output_SearchByImage.html',recipes=recipes, img=img, nutrients_data=nutrients_data)
