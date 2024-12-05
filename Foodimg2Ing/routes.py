@@ -71,12 +71,23 @@ def predict():
         ingridientlist = request.form.get('ingridientlist').split(',')
         recipes = []
         data = json.loads(get_indg2recipes(ingridientlist))
-
+        recipesname = []
         for key,value in data.items():
             recipes.append(value)
-        print(recipes)
+        
+        for entry in recipes:
+            recipesname.append(entry.get("recipe_title"))
 
-        return render_template('ingd2Recipe.html',recipes=recipes, ingredients=ingridientlist)
+        nutrients_data = []
+        for recipe_title in recipesname:                
+            nutrients = fetch_nutrients(recipe_title)                
+            nutrients_data.append({
+                "recipe": recipe_title,
+                "nutrients": nutrients
+            })
+
+
+        return render_template('ingd2Recipe.html',recipes=recipes, ingredients=ingridientlist, nutrients_data=nutrients_data)
 
     else:
         return jsonify({'error': 'Invalid input'}), 400
