@@ -78,9 +78,10 @@ def output(uploadedfile):
             'instructions': outs['recipe']
             })
         else:
-            recipes.append({
-            'title' : "Not a valid recipe!",
-            'Error' : "Reason: " + valid['reason']
-            })
+            continue
+            # recipes.append({
+            # 'title' : "Not a valid recipe!",
+            # 'Error' : "Reason: " + valid['reason']
+            # })
 
     return recipes
