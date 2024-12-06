@@ -4,9 +4,9 @@ import torch
 from torchvision import transforms
 from tensorflow.keras.preprocessing import image
 from PIL import Image
-from Foodimg2Ing.predictor.args import get_parser
-from Foodimg2Ing.predictor.model import get_model
-from Foodimg2Ing.predictor.utils.output_utils import prepare_output
+from args import get_parser
+from model import get_model
+from utils.output_utils import prepare_output
 
 # Initialize once
 data_dir = os.path.join(os.path.dirname(__file__), '..', 'predictor', 'models')
@@ -16,6 +16,9 @@ ingrs_vocab = pickle.load(open(os.path.join(data_dir, 'ingr_vocab.pkl'), 'rb'))
 vocab = pickle.load(open(os.path.join(data_dir, 'instr_vocab.pkl'), 'rb'))
 ingr_vocab_size = len(ingrs_vocab)
 instrs_vocab_size = len(vocab)
+
+#print(ingrs_vocab)
+#print(vocab)
 
 # Load model once
 use_gpu = True
@@ -32,6 +35,7 @@ model.load_state_dict(torch.load(model_path, map_location=map_loc, weights_only=
 model.to(device)
 model.eval()
 
+
 # Define image transformations
 to_input_transf = transforms.Compose([
     transforms.ToTensor(),
@@ -44,7 +48,7 @@ transform = transforms.Compose([
 ])
 
 def output(uploadedfile):
-    """Generate recipe predictions from an uploaded image file."""
+#     """Generate recipe predictions from an uploaded image file."""
     img = image.load_img(uploadedfile)
     image_transf = transform(img)
     image_tensor = to_input_transf(image_transf).unsqueeze(0).to(device)
@@ -85,3 +89,4 @@ def output(uploadedfile):
             # })
 
     return recipes
+

@@ -1,22 +1,47 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
-from torchvision.models import resnet18, resnet50, resnet101, resnet152, vgg16, vgg19, inception_v3
+
 import torch
 import torch.nn as nn
 import random
 import numpy as np
 
+from torchvision.models import resnet50, resnet101, resnet152
+from torchvision.models import ResNet50_Weights, ResNet101_Weights, ResNet152_Weights
 
 class EncoderCNN(nn.Module):
     def __init__(self, embed_size, dropout=0.5, image_model='resnet101', pretrained=True):
-        """Load the pretrained ResNet-152 and replace top fc layer."""
+        """Load the pretrained ResNet and replace top fc layer."""
         super(EncoderCNN, self).__init__()
-        resnet = globals()[image_model](pretrained=pretrained)
-        modules = list(resnet.children())[:-2]  # delete the last fc layer.
+
+        # Dynamically map the model name to weights
+        weights_map = {
+            'resnet50': ResNet50_Weights.DEFAULT,
+            'resnet101': ResNet101_Weights.DEFAULT,
+            'resnet152': ResNet152_Weights.DEFAULT,
+        }
+
+        # Get the appropriate weights
+        weights = weights_map[image_model] if pretrained else None
+
+        # Dynamically get the ResNet model
+        model_map = {
+            'resnet50': resnet50,
+            'resnet101': resnet101,
+            'resnet152': resnet152,
+        }
+        resnet = model_map[image_model](weights=weights)  # Updated argument
+        
+        # Keep all layers except the last two
+        modules = list(resnet.children())[:-2]  # delete the last fc layer
         self.resnet = nn.Sequential(*modules)
 
-        self.linear = nn.Sequential(nn.Conv2d(resnet.fc.in_features, embed_size, kernel_size=1, padding=0),
-                                    nn.Dropout2d(dropout))
+        # Replace the last FC layer
+        self.linear = nn.Sequential(
+            nn.Conv2d(resnet.fc.in_features, embed_size, kernel_size=1, padding=0),
+            nn.Dropout2d(dropout)
+        )
+
 
     def forward(self, images, keep_cnn_gradients=False):
         """Extract feature vectors from input images."""

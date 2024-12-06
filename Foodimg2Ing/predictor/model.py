@@ -4,14 +4,14 @@ import torch
 import torch.nn as nn
 import random
 import numpy as np
-from Foodimg2Ing.predictor.modules.encoder import EncoderCNN, EncoderLabels
-from Foodimg2Ing.predictor.modules.transformer_decoder import DecoderTransformer
-from Foodimg2Ing.predictor.modules.multihead_attention import MultiheadAttention
-from Foodimg2Ing.predictor.utils.metrics import softIoU, MaskedCrossEntropyCriterion
+from modules.encoder import EncoderCNN, EncoderLabels
+from modules.transformer_decoder import DecoderTransformer
+from modules.multihead_attention import MultiheadAttention
+from utils.metrics import softIoU, MaskedCrossEntropyCriterion
 import pickle
 import os
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
+print(device)
 
 def label2onehot(labels, pad_value):
 
@@ -74,11 +74,12 @@ def get_model(args, ingr_vocab_size, instrs_vocab_size):
                                       last_ln=True,
                                       scale_embed_grad=False)
     # recipe loss
-    criterion = MaskedCrossEntropyCriterion(ignore_index=[instrs_vocab_size-1], reduce=False)
+    #criterion = MaskedCrossEntropyCriterion(ignore_index=[instrs_vocab_size-1], reduce=False)
+    criterion = MaskedCrossEntropyCriterion(ignore_index=[instrs_vocab_size - 1], reduction='none')
 
     # ingredients loss
-    label_loss = nn.BCELoss(reduce=False)
-    eos_loss = nn.BCELoss(reduce=False)
+    label_loss = nn.BCELoss(reduction='none')
+    eos_loss = nn.BCELoss(reduction='none')
     
     
     model = InverseCookingModel(encoder_ingrs, decoder, ingr_decoder, encoder_image,
